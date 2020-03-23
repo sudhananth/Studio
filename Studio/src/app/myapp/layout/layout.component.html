@@ -1,0 +1,43 @@
+<div class="ap_slide_menu">
+    <ul>
+        <!-- <li (click)="gotoPage('orderdetails')">
+            <i class="fab fa-first-order"></i>
+        </li> -->
+        <li (click)="gotoPage('daybook')"  tooltip="Day Book" placement="right" container="body">
+            <i class="fas fa-book-open"></i>
+        </li>
+        <li (click)="gotoPage('customer')"  tooltip="Customers" placement="left" container="body">
+            <i class="fas fa-user-tie"></i>
+        </li>
+        <!-- <li (click)="gotoPage('orderdetails')">
+            <i class="fas fa-camera-retro"></i>
+        </li> -->
+        <li (click)="gotoPage('account')"  tooltip="Accounts" placement="left" container="body">
+            <i class="fas fa-money-check-alt"></i>
+        </li>
+        <li *ngIf="uI && uI.UserTypeId=='Super'"  (click)="gotoPage('users')" tooltip="Users" placement="left" container="body">
+            <i class="fas fa-users-cog"></i>
+        </li>
+        <!-- <li (click)="gotoPage('orderdetails')">
+            <i class="fas fa-chart-pie"></i>
+        </li> -->
+        <!-- <li (click)="gotoPage('orderdetails')">
+            <i class="fas fa-building"></i>
+        </li> -->
+    </ul>
+
+</div>
+<div class="ap_header">
+    <div class="ap_nav">
+        <img alt="" src="../../../assets/img/decore.png" class="ap_decorater" />
+        <h4 class="ap_logo_text">Account Plus</h4>
+        <span class="ap_userInfo">
+            <span class="ap_user_text">{{uI.UserName}} <br /> <span (click)="logOut()" class="ap_logout">Logout</span>
+            </span>
+            <img src="../../../assets/img/user_icon.png" class="ap_user_icon" alt="user" />
+        </span>
+    </div>
+</div>
+<div class="ap_boby">
+    <router-outlet></router-outlet>
+</div>

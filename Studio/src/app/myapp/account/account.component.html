@@ -1,0 +1,90 @@
+<div>
+    <div class="col-sm-6 ap_padding0">
+        <div class="ap_body_layout">
+            <div class="ap_innerbox">
+                <h3 class="ap_title">Accounts</h3>
+                <p-table #dt [columns]="cols" [value]="accounts" [paginator]="true" [rows]="10" [scrollable]="true"
+                    [style]="{width:'100%'}" scrollHeight="200px">
+                    <ng-template pTemplate="caption">
+                        <div class="ui-table-globalfilter-container" style="text-align: left;">
+                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                style="width: 250px;padding: 3px;font-size: 12px;font-weight: normal;">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col style="width:50px">
+                            <col *ngFor="let col of columns" style="width:200px">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th></th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" *ngIf="accounts.length == 0">
+                        <tr>
+                            <td colspan="5">
+                                No Records Found
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td class="ap_align_center">
+                                <i (click)="Edit(rowData)" class="ap_pointer ap_edit_icon fas fa-pencil-alt"></i>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 ap_padding_right0">
+        <div class="ap_body_layout">
+            <form [formGroup]="frmAccount" autocomplete="off">
+                <div class="ap_innerbox">
+                    <h3 class="ap_title">{{accountId==0?'Add':'Edit'}} Accounts</h3>
+                    <div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Account Name</label>
+                            <input formControlName="AccountName" type="text" class="ap_input ap_input_mandatory">
+
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Account Category</label>
+                            <select formControlName="AccountCategory" class="ap_input ap_input_mandatory">
+                                <option [value]="ut.Key" *ngFor="let ut of accountCategories">{{ut.Value}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Credit Balance</label>
+                            <input formControlName="CreditBalance" type="number" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Debit Balance</label>
+                            <input formControlName="DebitBalance" type="number" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">AsOnDate</label>
+                            <p-calendar formControlName="AsOnDate" class="ap_input_date_mandatory"></p-calendar>
+                        </div>
+                        <div class="col-sm-12">
+                            <input (click)="submitAccount()" [disabled]="frmAccount.invalid" type="submit"
+                                value="Submit" class="ap_btn ap_primary_btn" />
+                            <input (click)="addAccount()" type="button" value="Cancel" class="ap_btn ap_warning_btn" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="ap_login_bg">
+    <div>
+        <h4>Account Plus</h4>
+    </div>
+    <div *ngIf="statusId==1">
+        <form [formGroup]="frmSignUp">
+            <h3>Login</h3>
+            <input formControlName="Email" placeholder="Login Id" type="text" class="form-control" />
+            <input formControlName="NewPassword" placeholder="Password" type="password" class="form-control ap_margin_t_b10" />
+            <input [disabled]="frmSignUp.invalid" (click)="SignIn()" type="submit" class="btn btn-default ap_login_btn"
+                value="Sign In" />           
+            <div class="clearboth"></div>
+        </form>
+    </div>   
+</div>

@@ -1,0 +1,102 @@
+<div>
+    <div class="col-sm-6 ap_padding0">
+        <div class="ap_body_layout">
+            <div class="ap_innerbox">
+                <h3 class="ap_title">Users</h3>
+                <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="10" [scrollable]="true"
+                    [style]="{width:'100%'}" scrollHeight="200px">
+                    <ng-template pTemplate="caption">
+                        <div class="ui-table-globalfilter-container" style="text-align: left;">
+                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                style="width: 250px;padding: 3px;font-size: 12px;font-weight: normal;">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col style="width:50px">
+                            <col *ngFor="let col of columns">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>
+                            </th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td class="ap_align_center">
+                                <i (click)="Edit(rowData)" class="ap_pointer ap_edit_icon fas fa-pencil-alt"></i>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                {{rowData[col.field]}}
+                            </td>
+                        </tr>
+
+                    </ng-template>
+                    <ng-template>
+                        <tr *ngIf="users.length == 0">
+                            <td colspan="5">
+                                No Records Found
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 ap_padding_right0">
+        <div class="ap_body_layout">
+            <form [formGroup]="frmUser" autocomplete="off">
+                <div class="ap_innerbox">
+                    <h3 class="ap_title">{{userId==0?'Add':'Edit'}} Users</h3>
+                    <div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Login Id</label>
+                            <input *ngIf="userId==0" formControlName="LoginId" type="text"
+                                class="ap_input ap_input_mandatory">
+                            <input *ngIf="userId!=0" readonly value="{{frmUser.value.LoginId}}" type="text"
+                                class="ap_input ap_input_mandatory">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">User Type</label>
+                            <select formControlName="UserType" class="ap_input ap_input_mandatory">
+                                <option [value]="ut.Key" *ngFor="let ut of userTypes">{{ut.Value}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Username</label>
+                            <input formControlName="UserName" type="text" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Email Id</label>
+                            <input formControlName="UserEmail" type="text" autocomplete="nope" class="ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Password</label>
+                            <input *ngIf="userId==0" autocomplete="new-password" formControlName="Password"
+                                type="password" class="ap_input_mandatory ap_input">
+                            <input *ngIf="userId!=0" readonly autocomplete="new-password"
+                                value="{{frmUser.value.Password}}" type="password" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Active</label>
+                            <select formControlName="ActiveFlag" class="ap_input ap_input_mandatory">
+                                <option [value]="ut.Key" *ngFor="let ut of activeFlags">{{ut.Value}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <input (click)="submitUser()" [disabled]="frmUser.invalid" type="submit" value="Submit"
+                                class="ap_btn ap_primary_btn" />
+                            <input (click)="addUser()" type="button" value="Cancel" class="ap_btn ap_warning_btn" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

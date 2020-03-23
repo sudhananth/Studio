@@ -1,0 +1,306 @@
+:root{
+    --vs-primary: 115,103,240;
+    --vs-primaryhover:68, 59, 160;
+    --vs-success: 40,199,111;
+    --vs-danger: 234,84,85;
+    --vs-warning: 255,159,67;
+    --vs-dark: 30,30,30;
+}
+.ap_slide_menu{
+    background-color: #10163a;
+    position: fixed;
+    height: 100%;
+    top:0;
+    left: 0;
+    width: 80px;
+    border-right: 5px solid #6059c8;
+    
+}
+.ap_header{
+    width: calc(100% - 140px);
+    right: 30px;
+    position: fixed;
+    margin: 0;
+    top: 20px;
+}
+.ap_header .ap_nav{
+    background: #6059c8;
+    border-radius: .5rem;
+    padding: .8rem 1rem;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    height: 65px;
+}
+.ap_logo_text{
+    padding: 0;
+    margin: 0;
+    color: #c2c6dc;
+    font-size: 20px;
+    display: inline;
+    position: relative;
+    top: 12px;
+    vertical-align: top;
+}
+.ap_user_icon{
+    width: 40;
+    height: 40px;
+}
+.ap_userInfo{
+    display: inline-block;
+    position: absolute;
+    right: 25px;
+    top: 13px;
+}
+.ap_user_text{
+    vertical-align: top;
+    color: #c2c6dc;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 14px;
+    position: relative;
+    top: 3px;
+    right: 10px;
+}
+.ap_logout{
+    font-weight: normal;
+    text-align: right;
+    display: block;
+    font-size: 12px;
+    cursor: pointer;
+}
+.ap_logout:hover{
+    color: #f76060;
+    text-decoration: underline;
+}
+.ap_boby{
+    position: relative;
+    top: 100px;
+    padding: 0 30px 0 110px;
+    color: #c2c6dc;
+}
+.ap_body_layout{
+    background: #10163a;
+    margin: 0;
+    height: calc(100vh - 110px);
+    border-radius: 8px;
+    overflow: auto;
+    max-height: calc(100vh - 110px);
+}
+
+/* width */
+.ap_body_layout::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  .ap_body_layout::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .ap_body_layout::-webkit-scrollbar-thumb {
+    background: #6059c8; 
+  }
+  
+  /* Handle on hover */
+  .ap_body_layout::-webkit-scrollbar-thumb:hover {
+    background: #6059c8; 
+  }
+
+
+
+.ap_padding0{
+    padding: 0;
+}
+.ap_padding_right0{
+    padding-right: 0;
+}.ap_decorater{
+    width: 100px;
+    position: relative;
+    top: -7px;
+    right: 9px;
+}
+.ap_slide_menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+.ap_slide_menu ul li{
+    padding: 20px 0;
+    border-bottom: 1px solid #342caf;
+    cursor: pointer;
+}
+.ap_slide_menu ul li:hover{
+    background: #6059c8;
+}
+
+.ap_slide_menu ul li i{
+    font-size: 20px;
+    color: #c2c6dc;
+    cursor: pointer;
+}
+.ap_decorater_menu{
+    width: 85px;
+    position: relative;
+    top: 1px;
+    right: 9px;
+}
+.ap_title{
+    font-size: 18px;
+    border-left: 3px solid #6059c8;
+    padding: 10px;
+    display: inline-block;
+}
+.ap_innerbox{
+    padding: 1% 2%;
+}
+
+body .ui-table .ui-table-thead > tr > th{   
+    border: 0px solid #c8c8c8 !important ;
+    font-weight: 600  !important;
+    color: #e4e6ef !important ;
+    font-size: 13px;
+    background-color: #6059c8 !important ;
+}
+body .ui-table .ui-table-tbody > tr > td{
+    border: 1px solid #efefef !important;
+}
+.ap_input,body .ui-inputtext{
+    color: inherit !important;
+    position: relative !important;
+    padding: .9rem !important;
+    border-radius: 5px !important;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,.15) !important;
+    box-shadow: 0 0 0 0 rgba(0,0,0,.15) !important;
+    -webkit-transition: all .3s ease !important;
+    transition: all .3s ease !important;
+    width: 100% !important;
+    background: #262c49 !important;
+}
+.ui-calendar{
+    display: block !important;
+}
+.ap_label{
+    font-size: 12px;
+}
+.ap_input_height{
+    height: 90px;
+}
+.ap_input_mandatory{
+    border-left: 5px solid #f76060;
+}
+.ap_input_date_mandatory .ui-inputtext{
+    border-left: 5px solid #f76060 !important;
+}
+.ap_login_bg{ 
+    margin: 0 auto;
+    width: 350px;
+    position: relative;
+    padding-top: 15%;
+}
+.ap_login_bg h4{
+    font-size: 30px;
+    color: #efefef;
+}
+.ap_login_bg h3{
+    padding: 0;
+    margin: 10px 0;
+    font-size: 18px;
+    color: #ccc;
+}
+.ap_margin_t_b10{
+    margin: 10px 0;
+}
+.ap_forgotpassword{
+    cursor: pointer;
+    font-size: 15px;
+    float: right;
+    color: #b28aff;margin-top:5px;
+}
+.ap_login_btn{
+    width: 100%;
+    background: #3267de;
+    color: #fff;
+    border: navajowhite;
+    padding: 8px;
+    font-weight: 600;
+}
+.ap_login_btn:hover{
+    background: #5e719a;
+}
+.ap_pointer{
+    cursor: pointer;
+}
+.ap_edit_icon{
+    color: #6059c8;
+    font-size: 18px;
+}
+.ap_align_center{
+    text-align: center;
+}
+.ap_btn{    
+    border: none;
+    border-radius: 5px !important;
+    padding: 5px 15px;
+    margin: 5px;
+}
+.ap_primary_btn{
+    background: rgba(var(--vs-primary),1)!important;
+    -webkit-box-shadow: 0 8px 25px -8px rgba(var(--vs-primary),1);
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-primary),1);  
+}
+.ap_primary_btn:hover{
+    background: rgba(var(--vs-primaryhover),1)!important;
+    -webkit-box-shadow: 0 8px 25px -8px rgba(var(--vs-primaryhover),1);
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-primaryhover),1);
+}
+
+.ap_warning_btn{
+    background: rgba(var(--vs-warning),1)!important;
+    -webkit-box-shadow: 0 8px 25px -8px rgba(var(--vs-warning),1);
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-warning),1);
+    color: darkslategrey;
+}
+.ap_warning_btn:hover{
+    background: rgba(var(--vs-warning),1)!important;
+    -webkit-box-shadow: 0 8px 25px -8px rgba(var(--vs-warning),1);
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-warning),1);
+}
+.ap_float_right{
+    float: right;
+}
+
+button[disabled], html input[disabled] {
+    cursor: not-allowed;
+}
+p-progressbar {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    top: 0;
+}
+.ui-inputtext{
+    border: inherit !important;
+}
+body .ui-table .ui-table-tbody > tr > td{
+    overflow-wrap: break-word;
+}
+.ap_body_layout .ui-autocomplete{
+    width:100%;
+}
+.ap_body_layout .ui-autocomplete .ui-autocomplete-input
+{
+    width: 91% !important;
+    border-left: 5px solid #f76060 !important;
+}
+.ap_body_layout .ui-autocomplete-dd .ui-autocomplete-dropdown.ui-corner-all{
+    padding: 2px;
+}
+.ap_body_layout .ui-autocomplete-list-item .ui-helper-clearfix > div{
+    float:none !important;
+    margin: 0 !important;
+}

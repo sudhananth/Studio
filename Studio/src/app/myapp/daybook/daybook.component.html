@@ -1,0 +1,180 @@
+<div>
+    <div class="col-sm-6 ap_padding0">
+        <div class="ap_body_layout">
+            <div class="ap_innerbox">
+                <h3 class="ap_title">Day Book</h3>
+                <p-table #dt [columns]="cols" [value]="daybooks" [paginator]="true" [rows]="10" [scrollable]="true"
+                    [style]="{width:'100%'}" scrollHeight="200px">
+                    <ng-template pTemplate="caption">
+                        <div class="ui-table-globalfilter-container" style="text-align: left;">
+                            <input type="text" pInputText size="50" placeholder="Global Filter"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                style="width: 250px;padding: 3px;font-size: 12px;font-weight: normal;">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                            <col style="width:70px">
+                            <col *ngFor="let col of columns" style="width:200px">
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th></th>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" *ngIf="daybooks.length == 0">
+                        <tr>
+                            <td colspan="5">
+                                No Records Found
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td class="ap_align_center">
+                                <i (click)="Edit(rowData)" class="ap_pointer ap_edit_icon fas fa-pencil-alt"></i>
+                            </td>
+                            <td *ngFor="let col of columns">
+                                <span *ngIf="col.field=='TxnDate'">{{rowData[col.field] | date:'shortDate'}}</span>
+                                <span *ngIf="col.field!='TxnDate'">{{rowData[col.field]}}</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 ap_padding_right0">
+        <div class="ap_body_layout">
+            <form [formGroup]="frmdaybooks" autocomplete="off">
+                <div class="ap_innerbox">
+                    <h3 class="ap_title">{{DayBookId==0?'Add':'Edit'}} Day Book</h3>
+                    <div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Txn Date</label>
+                            <input *ngIf="DayBookId!=0" type="text" readonly
+                                value="{{frmdaybooks.value.TxnDate | date:'shortDate'}}"
+                                class="ap_input ap_input_mandatory" />
+                            <p-calendar *ngIf="DayBookId==0" formControlName="TxnDate" class="ap_input_date_mandatory">
+                            </p-calendar>
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Txn Mode</label>
+                            <input *ngIf="DayBookId!=0" type="text" readonly value="{{frmdaybooks.value.TxnMode}}"
+                                class="ap_input ap_input_mandatory" />
+                            <select *ngIf="DayBookId==0" formControlName="TxnMode" class="ap_input ap_input_mandatory">
+                                <option [value]="ut.Key" *ngFor="let ut of TransactionMode">{{ut.Value}}</option>
+                            </select>
+                        </div>
+                        <div *ngIf="frmdaybooks.value.TxnMode!='Cash' && frmdaybooks.value.TxnMode!='Cheque'"
+                            class="col-sm-12 ap_input_height">
+                            <label class="ap_label">Txn ReferenceNo</label>
+                            <input formControlName="TxnReferenceNo" type="text" class="ap_input ap_input_mandatory">
+                        </div>
+                        <div *ngIf="frmdaybooks.value.TxnMode=='Cheque'">
+                            <div class="col-sm-6 ap_input_height">
+                                <label class="ap_label">Bank Name</label>
+                                <input formControlName="BankName" type="text" class="ap_input ap_input_mandatory">
+                            </div>
+                            <div class="col-sm-6 ap_input_height">
+                                <label class="ap_label">Cheque No</label>
+                                <input formControlName="ChequeNo" type="number" class="ap_input ap_input_mandatory">
+                            </div>
+                            <div class="col-sm-6 ap_input_height">
+                                <label class="ap_label">Cheque Date</label>
+                                <p-calendar formControlName="ChequeDate" class="ap_input_date_mandatory"></p-calendar>
+                            </div>
+                            <div class="col-sm-6 ap_input_height">
+                                <label class="ap_label">Cheque Status</label>
+                                <select formControlName="ChequeStatus" class="ap_input ap_input_mandatory">
+                                    <option [value]="ut.Key" *ngFor="let ut of chequeStatusList">{{ut.Value}}</option>
+                                </select>
+                            </div>
+
+
+                            <div style="clear: both;position: relative;">
+                                <p-table [columns]="cols1" [value]="chequeStatus" [paginator]="false" [rows]="10"
+                                    [scrollable]="false" [style]="{width:'100%'}" scrollHeight="200px">
+
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th *ngFor="let col of columns">
+                                                {{col.header}}
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                        <tr>
+                                            <td *ngFor="let col of columns">
+                                                <span
+                                                    *ngIf="col.field=='TxnDate'">{{rowData[col.field] | date:'shortDate'}}</span>
+                                                <span *ngIf="col.field!='TxnDate'">{{rowData[col.field]}}</span>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Credit Account</label>
+                            <p-autoComplete formControlName="CreditAccount" [suggestions]="filteredAccounts"
+                                (completeMethod)="filterAccounts($event)" [size]="30" [minLength]="1"
+                                placeholder="Hint: type Account Name" [dropdown]="true"
+                                (onBlur)="focusOutAccounts($event,'CreditAccount')">
+                                <ng-template let-brand pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{brand}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Debit Account</label>
+                            <p-autoComplete formControlName="DebitAccount" [suggestions]="filteredAccounts"
+                                (completeMethod)="filterAccounts($event)" [size]="30" [minLength]="1"
+                                placeholder="Hint: type Account Name" [dropdown]="true"
+                                (onBlur)="focusOutAccounts($event,'DebitAccount')">
+                                <ng-template let-brand pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <div style="font-size:18px;float:right;margin:10px 10px 0 0">{{brand}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Txn Amount</label>
+                            <input formControlName="TxnAmount" type="number" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Tax Amount</label>
+                            <input formControlName="TaxAmount" type="number" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-12 ap_input_height">
+                            <label class="ap_label">Description</label>
+                            <input formControlName="Description" type="text" class="ap_input_mandatory ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Ref No</label>
+                            <input formControlName="RefNo" type="text" class="ap_input">
+                        </div>
+                        <div class="col-sm-6 ap_input_height">
+                            <label class="ap_label">Ref Text</label>
+                            <input formControlName="RefText" type="text" class="ap_input">
+                        </div>
+                        <div class="col-sm-12">
+                            <input (click)="submitDaybook()" [disabled]="frmdaybooks.invalid" type="submit"
+                                value="Submit" class="ap_btn ap_primary_btn" />
+                            <input (click)="addDaybook()" type="button" value="Cancel" class="ap_btn ap_warning_btn" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
